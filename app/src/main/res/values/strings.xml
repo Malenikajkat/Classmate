@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Classmate</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Настройки</string>
+    <string name="menu_home">Главная</string>
+    <string name="menu_chat">Чат</string>
+    <string name="menu_lectures">Лекции</string>
+    <string name="menu_schedule">Расписание</string>
+    <string name="menu_calendar">Календарь</string>
+    <string name="menu_groups">Группы</string>
+    <string name="menu_attendance">Посещаемость</string>
+    <string name="menu_classes">Онлайн занятия</string>
+    <string name="menu_diary">Дневник</string>
+    <string name="add_new_student">Новый студент</string>
+    <string name="send">Ввод сообщения</string>
+    <string name="user_image">Пользовательский образ</string>
+    <string name="new_friend_request">Запрос на добавление в друзья</string>
+    <string name="accept">Принимать</string>
+    <string name="decline">Отказать</string>
+
+</resources>
