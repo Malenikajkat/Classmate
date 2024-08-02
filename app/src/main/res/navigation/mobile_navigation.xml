@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    android:background="@color/cyan50"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.malenikajkat.classmate.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_attendance"
+        android:name="com.malenikajkat.classmate.ui.attendance.AttendanceFragment"
+        android:label="@string/menu_attendance"
+        tools:layout="@layout/fragment_attendance" />
+    <fragment
+        android:id="@+id/nav_calendar"
+        android:name="com.malenikajkat.classmate.ui.calendar.CalendarFragment"
+        android:label="@string/menu_calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/nav_chat"
+        android:name="com.malenikajkat.classmate.ui.chat.ChatFragment"
+        android:label="@string/menu_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/nav_classes"
+        android:name="com.malenikajkat.classmate.ui.classes.ClassesFragment"
+        android:label="@string/menu_classes"
+        tools:layout="@layout/fragment_classes" />
+    <fragment
+        android:id="@+id/nav_diary"
+        android:name="com.malenikajkat.classmate.ui.diary.DiaryFragment"
+        android:label="@string/menu_diary"
+        tools:layout="@layout/fragment_diary" />
+    <fragment
+        android:id="@+id/nav_groups"
+        android:name="com.malenikajkat.classmate.ui.groups.GroupsFragment"
+        android:label="@string/menu_groups"
+        tools:layout="@layout/fragment_groups" />
+    <fragment
+        android:id="@+id/nav_lestures"
+        android:name="com.malenikajkat.classmate.ui.lestures.LesturesFragment"
+        android:label="@string/menu_lectures"
+        tools:layout="@layout/fragment_lestures" />
+    <fragment
+        android:id="@+id/nav_schedule"
+        android:name="com.malenikajkat.classmate.ui.schedule.ScheduleFragment"
+        android:label="@string/menu_schedule"
+        tools:layout="@layout/fragment_schedule" />
+
+</navigation>
