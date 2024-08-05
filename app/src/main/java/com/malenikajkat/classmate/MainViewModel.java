@@ -1,4 +1,4 @@
-package com.malenikajkat.classmate.ui.main
+package com.malenikajkat.classmate;
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,7 +29,7 @@ class MainViewModel : ViewModel() {
     var userNotificationsList: LiveData<MutableList<UserNotification>> = _userNotificationsList
 
     init {
-       setupAuthObserver()
+        setupAuthObserver()
     }
 
     override fun onCleared() {
