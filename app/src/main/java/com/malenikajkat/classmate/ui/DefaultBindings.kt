@@ -1,11 +1,11 @@
-package com.fredrikbogg.android_chat_app.ui
+package com.malenikajkat.classmate.ui
 
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.fredrikbogg.android_chat_app.R
+import com.malenikajkat.classmate.R
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.BlurTransformation
 import java.text.SimpleDateFormat

@@ -1,4 +1,4 @@
-package com.malenikajkat.classmate;
+package com.malenikajkat.classmate
 
 import android.app.Application
 import com.malenikajkat.classmate.util.SharedPreferencesUtil
@@ -13,13 +13,13 @@ class App : Application() {
 
     companion object {
         lateinit var application: Application
-        private set
+            private set
 
         var myUserID: String = ""
-        get() {
-            field = SharedPreferencesUtil.getUserID(application.applicationContext).orEmpty()
-            return field
-        }
-        private set
+            get() {
+                field = SharedPreferencesUtil.getUserID(application.applicationContext).orEmpty()
+                return field
+            }
+            private set
     }
 }

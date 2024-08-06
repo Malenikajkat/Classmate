@@ -1,10 +1,10 @@
-package com.fredrikbogg.android_chat_app.ui
+package com.malenikajkat.classmate.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.fredrikbogg.android_chat_app.data.Event
-import com.fredrikbogg.android_chat_app.data.Result
+import com.malenikajkat.classmate.data.Event
+import com.malenikajkat.classmate.data.Result
 
 abstract class DefaultViewModel : ViewModel() {
     protected val mSnackBarText = MutableLiveData<Event<String>>()
