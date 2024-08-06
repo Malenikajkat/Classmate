@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Название раздела настроек -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Настройки приложения"
+        android:textSize="24sp"
+        android:layout_marginTop="24dp"
+        android:gravity="center" />
+
+    <!-- Список настроек -->
+    <ListView
+        android:id="@+id/settings_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Элемент списка для настройки "Язык приложения" -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Язык приложения"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start" />
+
+        <!-- Элемент списка для настройки "Тема оформления" -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Тема оформления"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start" />
+
+        <!-- Элемент списка для настройки "Звуковые эффекты" -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Звуковые эффекты"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start" />
+        <!-- Элемент списка для настройки "Уведомления" -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Уведомления"
+            android:padding="16dp"
+            android:layout_marginTop="8dp"
+            android:gravity="start" />
+
+    </ListView>
+
+</LinearLayout>

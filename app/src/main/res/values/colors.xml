@@ -11,7 +11,7 @@
     <color name="lavender">#8672f7</color>
     <color name="greenish_blue">#2D465A</color>
     <color name="colorPrimary">#2D9CDB</color>
-    <color name="colorPrimaryDark">@color/colorPrimary</color>
+    <color name="colorPrimaryDark">#18FFFF</color>
     <color name="colorAccent">#F3D231</color>
     <color name="textError">#ff6262</color>
 </resources>
