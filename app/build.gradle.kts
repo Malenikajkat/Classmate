@@ -75,6 +75,9 @@ buildscript {
         androidTestImplementation(libs.androidx.junit)
         androidTestImplementation(libs.androidx.espresso.core)
         implementation(libs.google.services)
+        implementation("com.squareup.retrofit2:retrofit:2.4.0")
+        implementation("com.squareup.retrofit2:converter-gson:2.3.0")
+        implementation("com.squareup.okhttp3:logging-interceptor:4.2.1")
 
 
     }
