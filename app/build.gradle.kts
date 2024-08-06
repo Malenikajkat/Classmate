@@ -71,6 +71,7 @@ buildscript {
         implementation(libs.androidx.lifecycle.common)
         implementation(libs.appcompat.v7)
         implementation(libs.support.content)
+        implementation(libs.constraintlayout)
         testImplementation(libs.junit)
         androidTestImplementation(libs.androidx.junit)
         androidTestImplementation(libs.androidx.espresso.core)
