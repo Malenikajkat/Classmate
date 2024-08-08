@@ -51,9 +51,7 @@
         android:id="@+id/startFragment"
         android:name="com.malenikajkat.classmate.ui.start.StartFragment"
         android:label="Start">
-        <action
-            android:id="@+id/action_startFragment_to_createAccountFragment"
-            app:destination="@id/createAccountFragment" />
+
         <action
             android:id="@+id/action_startFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -67,22 +65,12 @@
         android:id="@+id/loginFragment"
         android:name="com.malenikajkat.classmate.ui.start.login.LoginFragment"
         android:label="Login"
-        tools:layout="@layout/fragment_login">
+        tools:layout="@layout/activity_login">
         <action
             android:id="@+id/action_loginFragment_to_navigation_chats"
             app:destination="@id/navigation_chats"
             app:launchSingleTop="true"
             app:popUpTo="@id/startFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/createAccountFragment"
-        android:name="com.malenikajkat.classmate.ui.start.createAccount.CreateAccountFragment"
-        android:label="Create Account"
-        tools:layout="@layout/fragment_create_account">
-        <action
-            android:id="@+id/action_createAccountFragment_to_navigation_chats"
-            app:destination="@id/navigation_chats"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/startFragment" />
-    </fragment>
+
 </navigation>
