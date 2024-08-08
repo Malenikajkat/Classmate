@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.malenikajkat.classmate"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -34,8 +34,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+
     buildFeatures {
-        viewBinding = true
+        dataBinding = true
+
     }
 }
 buildscript {
@@ -70,7 +73,7 @@ buildscript {
         implementation(libs.navigation)
         implementation(libs.androidx.lifecycle.common)
         implementation(libs.appcompat.v7)
-        implementation(libs.support.content)
+
         testImplementation(libs.junit)
         androidTestImplementation(libs.androidx.junit)
         androidTestImplementation(libs.androidx.espresso.core)
