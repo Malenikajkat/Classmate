@@ -18,26 +18,37 @@ import com.malenikajkat.classmate.util.forceHideKeyboard
 
 class LoginFragment : Fragment() {
 
+    // Создаем ViewModel для LoginFragment
     private val viewModel by viewModels<LoginViewModel>()
+
+    // Переменная для binding объектов пользователя
     private lateinit var viewDataBinding: FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = FragmentLoginBinding.inflate(inflater, container, false)
-            .apply { viewmodel = viewModel }
+        // Инициализируем viewDataBinding с fragment_login.xml
+        viewDataBinding = FragmentLoginBinding.inflate(inflater, container, false).apply {
+            viewmodel = viewModel
+        }
+        // Устанавливаем lifecycleOwner для возможности наблюдения LiveData
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+
+        // Указываем, что этот фрагмент имеет собственное меню
         setHasOptionsMenu(true)
+
         return viewDataBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        // Настраиваем наблюдатели для LiveData
         setupObservers()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            // Обработка нажатий кнопки "назад" в action bar
             android.R.id.home -> {
                 findNavController().popBackStack()
                 return true
@@ -47,22 +58,30 @@ class LoginFragment : Fragment() {
     }
 
     private fun setupObservers() {
+        // Наблюдаем за состоянием загрузки данных. Показ/скрытие глобального ProgressBar
         viewModel.dataLoading.observe(viewLifecycleOwner,
-            EventObserver { (activity as MainActivity).showGlobalProgressBar(it) })
+            EventObserver { isLoading ->
+                (activity as MainActivity).showGlobalProgressBar(isLoading)
+            })
 
+        // Наблюдаем за сообщениями для отображения в Snackbar
         viewModel.snackBarText.observe(viewLifecycleOwner,
-            EventObserver { text ->
-                view?.showSnackBar(text)
+            EventObserver { message ->
+                view?.showSnackBar(message)
                 view?.forceHideKeyboard()
             })
 
-        viewModel.isLoggedInEvent.observe(viewLifecycleOwner, EventObserver {
-            SharedPreferencesUtil.saveUserID(requireContext(), it.uid)
+        // Наблюдаем за событием успешного входа
+        viewModel.isLoggedInEvent.observe(viewLifecycleOwner, EventObserver { user ->
+            // Сохраняем ID пользователя в SharedPreferences
+            SharedPreferencesUtil.saveUserID(requireContext(), user.uid)
+            // Переходим к экрану чатов
             navigateToChats()
         })
     }
 
     private fun navigateToChats() {
+        // Навигация к экрану чатов
         findNavController().navigate(R.id.action_loginFragment_to_navigation_chats)
     }
 }

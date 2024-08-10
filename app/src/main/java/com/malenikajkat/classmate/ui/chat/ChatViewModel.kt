@@ -11,6 +11,7 @@ import com.malenikajkat.classmate.ui.DefaultViewModel
 import com.malenikajkat.classmate.data.Result
 import com.malenikajkat.classmate.util.addNewItem
 
+// Фабрика для создания экземпляра ChatViewModel
 class ChatViewModelFactory(private val myUserID: String, private val otherUserID: String, private val chatID: String) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -18,16 +19,21 @@ class ChatViewModelFactory(private val myUserID: String, private val otherUserID
     }
 }
 
+// Основной ViewModel для чата
 class ChatViewModel(private val myUserID: String, private val otherUserID: String, private val chatID: String) : DefaultViewModel() {
 
+    // Репозиторий для доступа к базе данных
     private val dbRepository: DatabaseRepository = DatabaseRepository()
 
+    // LiveData для информации о другом пользователе и для добавленных сообщений
     private val _otherUser: MutableLiveData<UserInfo> = MutableLiveData()
     private val _addedMessage = MutableLiveData<Message>()
 
+    // Обсерверы для Firebase
     private val fbRefMessagesChildObserver = FirebaseReferenceChildObserver()
     private val fbRefUserInfoObserver = FirebaseReferenceValueObserver()
 
+    // MediatorLiveData для списка сообщений и LiveData для текста нового сообщения
     val messagesList = MediatorLiveData<MutableList<Message>>()
     val newMessageText = MutableLiveData<String?>()
     val otherUser: LiveData<UserInfo> = _otherUser
@@ -39,10 +45,12 @@ class ChatViewModel(private val myUserID: String, private val otherUserID: Strin
 
     override fun onCleared() {
         super.onCleared()
+        // Очищаем обсерверы при очищении ViewModel
         fbRefMessagesChildObserver.clear()
         fbRefUserInfoObserver.clear()
     }
 
+    // Проверка и обновление статуса последнего сообщения
     private fun checkAndUpdateLastMessageSeen() {
         dbRepository.loadChat(chatID) { result: Result<Chat> ->
             if (result is Result.Success && result.data != null) {
@@ -56,6 +64,7 @@ class ChatViewModel(private val myUserID: String, private val otherUserID: Strin
         }
     }
 
+    // Настройка чата, загрузка информации о другом пользователе
     private fun setupChat() {
         dbRepository.loadAndObserveUserInfo(otherUserID, fbRefUserInfoObserver) { result: Result<UserInfo> ->
             onResult(_otherUser, result)
@@ -65,6 +74,7 @@ class ChatViewModel(private val myUserID: String, private val otherUserID: Strin
         }
     }
 
+    // Загрузка и наблюдение за новыми сообщениями
     private fun loadAndObserveNewMessages() {
         messagesList.addSource(_addedMessage) { messagesList.addNewItem(it) }
 
@@ -76,6 +86,7 @@ class ChatViewModel(private val myUserID: String, private val otherUserID: Strin
         }
     }
 
+    // Отправка нового сообщения
     fun sendMessagePressed() {
         if (!newMessageText.value.isNullOrBlank()) {
             val newMsg = Message(myUserID, newMessageText.value!!)

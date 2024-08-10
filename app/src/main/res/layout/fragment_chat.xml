@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- DataBinding section includes the variable declaration -->
     <data>
-
         <variable
             name="viewmodel"
             type="com.malenikajkat.classmate.ui.chat.ChatViewModel" />
@@ -14,7 +14,8 @@
         android:id="@+id/textContentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cyan50">
+        android:background="@color/cyan50"
+        tools:context=".ui.chat.ChatFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/messagesRecyclerView"
@@ -22,8 +23,6 @@
             android:layout_height="0dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            app:bind_disable_item_animator="@{true}"
-            app:bind_messages_list="@{viewmodel.messagesList}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/layoutChatbox"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -64,7 +63,9 @@
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLines="6"
-                android:text="@={viewmodel.newMessageText}" />
+                android:minHeight="48dp"
+                android:text="@={viewmodel.newMessageText}"
+                tools:ignore="VisualLintTextFieldSize" />
 
             <Button
                 android:id="@+id/sendBtn"
@@ -76,6 +77,5 @@
                 android:text="@string/send"
                 android:textSize="14sp" />
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

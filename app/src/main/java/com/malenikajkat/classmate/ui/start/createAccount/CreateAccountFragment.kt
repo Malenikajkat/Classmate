@@ -16,36 +16,47 @@ import com.malenikajkat.classmate.util.SharedPreferencesUtil
 import com.malenikajkat.classmate.util.forceHideKeyboard
 import com.malenikajkat.classmate.util.showSnackBar
 
+// Определение фрагмента для создания аккаунта
 class CreateAccountFragment : Fragment() {
 
+    // Инициализация ViewModel для фрагмента
     private val viewModel by viewModels<CreateAccountViewModel>()
     private lateinit var viewDataBinding: FragmentCreateAccountBinding
 
+    // Создание представления фрагмента
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = FragmentCreateAccountBinding.inflate(inflater, container, false)
-            .apply { viewmodel = viewModel }
+        // Инфлейт макета и привязка ViewModel к датабиндингу
+        viewDataBinding = FragmentCreateAccountBinding.inflate(inflater, container, false).apply {
+            viewmodel = viewModel
+        }
+        // Назначение lifecycleOwner для датабиндинга
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+        // Установка флага, чтобы фрагмент имел меню опций
         setHasOptionsMenu(true)
-        return viewDataBinding.root
+        return viewDataBinding.root // Возвращаем корень макета
     }
 
+    // Выполняется после создания активности
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        // Настраиваем наблюдателей для ViewModel
         setupObservers()
     }
 
+    // Обработка выбора пунктов меню
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> {
-                findNavController().popBackStack()
+            android.R.id.home -> { // Обработка нажатия на кнопку "назад" в Action Bar
+                findNavController().popBackStack() // Возвращаемся к предыдущему фрагменту
                 return true
             }
         }
-        return super.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item) // Дефолтная обработка меню
     }
 
+    // Настройка наблюдателей для LiveData из ViewModel
     private fun setupObservers() {
         viewModel.dataLoading.observe(viewLifecycleOwner,
             EventObserver { (activity as MainActivity).showGlobalProgressBar(it) })
@@ -57,11 +68,14 @@ class CreateAccountFragment : Fragment() {
             })
 
         viewModel.isCreatedEvent.observe(viewLifecycleOwner, EventObserver {
+            // Сохраняем ID пользователя в SharedPreferences
             SharedPreferencesUtil.saveUserID(requireContext(), it.uid)
+            // Переходим к экрану чатов
             navigateToChats()
         })
     }
 
+    // Навигация к экрану чатов
     private fun navigateToChats() {
         findNavController().navigate(R.id.action_createAccountFragment_to_navigation_chats)
     }

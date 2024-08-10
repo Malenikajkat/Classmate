@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <import type="com.malenikajkat.classmate.ui.chats.ChatsViewModel" />
-
         <variable
             name="viewmodel"
             type="com.malenikajkat.classmate.ui.profile.ProfileViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +34,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars" />
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/userImageCardView"
             android:layout_width="wrap_content"
@@ -54,7 +47,6 @@
             app:layout_constraintTop_toBottomOf="@id/blurredUserImage"
             app:strokeColor="@android:color/white"
             app:strokeWidth="2dp">
-
             <ImageView
                 android:layout_width="120dp"
                 android:layout_height="120dp"
@@ -64,7 +56,6 @@
                 app:bind_image_url="@{viewmodel.otherUser.info.profileImageUrl}"
                 tools:src="@tools:sample/avatars[0]" />
         </com.google.android.material.card.MaterialCardView>
-
         <TextView
             android:id="@+id/nameText"
             style="@style/BoldText"
@@ -79,7 +70,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userImageCardView"
             tools:text="Имя" />
-
         <TextView
             android:id="@+id/statusText"
             android:layout_width="wrap_content"
@@ -95,7 +85,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nameText"
             tools:text="Статус" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/statesLayout"
             android:layout_width="0dp"
@@ -108,7 +97,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline60">
-
             <Button
                 android:id="@+id/addFriendButton"
                 android:layout_width="match_parent"
@@ -119,7 +107,6 @@
                 android:visibility="@{viewmodel.layoutState == viewmodel.layoutState.NOT_FRIEND? View.VISIBLE : View.GONE}"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible" />
-
             <Button
                 android:id="@+id/removeFriendButton"
                 android:layout_width="match_parent"
@@ -130,7 +117,6 @@
                 android:visibility="@{viewmodel.layoutState == viewmodel.layoutState.IS_FRIEND? View.VISIBLE : View.GONE}"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="gone" />
-
             <Button
                 android:id="@+id/requestSentButton"
                 android:layout_width="match_parent"
@@ -141,7 +127,6 @@
                 android:visibility="@{viewmodel.layoutState == viewmodel.layoutState.REQUEST_SENT? View.VISIBLE : View.GONE}"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="gone" />
-
             <Button
                 android:id="@+id/acceptRequestButton"
                 android:layout_width="match_parent"
@@ -152,21 +137,18 @@
                 android:visibility="@{viewmodel.layoutState == viewmodel.layoutState.ACCEPT_DECLINE? View.VISIBLE : View.GONE}"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="gone" />
-
             <Button
                 android:id="@+id/declineRequestButton"
                 android:layout_width="match_parent"
-                android:backgroundTint="@color/textError"
                 android:layout_height="55dp"
                 android:layout_marginTop="5dp"
+                android:backgroundTint="@color/textError"
                 android:onClick="@{() -> viewmodel.declineFriendRequestPressed()}"
                 android:text="@string/decline_friend_request"
                 android:textSize="16sp"
                 android:visibility="@{viewmodel.layoutState == viewmodel.layoutState.ACCEPT_DECLINE? View.VISIBLE : View.GONE}"
                 app:layout_constraintTop_toBottomOf="@id/acceptRequestButton"
                 tools:visibility="gone" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

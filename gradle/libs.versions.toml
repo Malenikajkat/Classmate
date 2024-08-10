@@ -31,6 +31,7 @@ navigation = "5.4.0"
 lifecycleCommon = "2.8.4"
 appcompatV7 = "28.0.0"
 supportContent = "28.0.0-alpha1"
+fragment = "1.8.2"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -63,6 +64,7 @@ navigation = { group = "com.google.android.libraries.navigation", name = "naviga
 androidx-lifecycle-common = { group = "androidx.lifecycle", name = "lifecycle-common", version.ref = "lifecycleCommon" }
 appcompat-v7 = { group = "com.android.support", name = "appcompat-v7", version.ref = "appcompatV7" }
 support-content = { group = "com.android.support", name = "support-content", version.ref = "supportContent" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -12,8 +12,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.malenikajkat.classmate.databinding.FragmentChatBinding
 import com.malenikajkat.classmate.databinding.ToolbarAddonChatBinding
-import kotlinx.android.synthetic.main.fragment_chat.*
-
 
 class ChatFragment : Fragment() {
 
@@ -36,25 +34,19 @@ class ChatFragment : Fragment() {
     private lateinit var listAdapterObserver: RecyclerView.AdapterDataObserver
     private lateinit var toolbarAddonChatBinding: ToolbarAddonChatBinding
 
-    override fun onDestroy() {
-        super.onDestroy()
-        removeCustomToolbar()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding =
-            FragmentChatBinding.inflate(inflater, container, false).apply { viewmodel = viewModel }
-        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
+        viewDataBinding = FragmentChatBinding.inflate(inflater, container, false).apply {
+            viewmodel = viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
+        toolbarAddonChatBinding = ToolbarAddonChatBinding.inflate(inflater, container, false).apply {
+            viewmodel = viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
         setHasOptionsMenu(true)
-
-        toolbarAddonChatBinding =
-            ToolbarAddonChatBinding.inflate(inflater, container, false)
-                .apply { viewmodel = viewModel }
-        toolbarAddonChatBinding.lifecycleOwner = this.viewLifecycleOwner
-
         return viewDataBinding.root
     }
 
@@ -64,43 +56,15 @@ class ChatFragment : Fragment() {
         setupListAdapter()
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                findNavController().popBackStack()
-                return true
+    private fun setupListAdapter() {
+        listAdapter = MessagesListAdapter(viewModel, requireArguments().getString(ARGS_KEY_USER_ID)!!)
+        listAdapterObserver = object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                messagesRecyclerView.scrollToPosition(positionStart)
             }
         }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun removeCustomToolbar() {
-        val supportActionBar = (activity as AppCompatActivity?)!!.supportActionBar
-        supportActionBar!!.setDisplayShowCustomEnabled(false)
-        supportActionBar.customView = null
-    }
-
-    private fun setupCustomToolbar() {
-        val supportActionBar = (activity as AppCompatActivity?)!!.supportActionBar
-        supportActionBar!!.setDisplayShowCustomEnabled(true)
-        supportActionBar.customView = toolbarAddonChatBinding.root
-    }
-
-    private fun setupListAdapter() {
-        val viewModel = viewDataBinding.viewmodel
-        if (viewModel != null) {
-            listAdapterObserver = (object : RecyclerView.AdapterDataObserver() {
-                override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                    messagesRecyclerView.scrollToPosition(positionStart)
-                }
-            })
-            listAdapter =
-                MessagesListAdapter(viewModel, requireArguments().getString(ARGS_KEY_USER_ID)!!)
-            listAdapter.registerAdapterDataObserver(listAdapterObserver)
-            viewDataBinding.messagesRecyclerView.adapter = listAdapter
-        } else {
-            throw Exception("The viewmodel is not initialized")
-        }
+        listAdapter.registerAdapterDataObserver(listAdapterObserver)
+        viewDataBinding.messagesRecyclerView.adapter = listAdapter
     }
 
     override fun onDestroyView() {

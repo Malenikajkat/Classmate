@@ -1,42 +1,36 @@
 package com.malenikajkat.classmate.ui.notifications
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.malenikajkat.classmate.App
-import com.malenikajkat.classmate.databinding.FragmentNotificationsBinding
+import android.os.Bundle;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.malenikajkat.classmate.ui.notifications.NotificationsViewModel;
 
-class NotificationsFragment : Fragment() {
+public class NotificationsActivity extends AppCompatActivity {
 
-    private val viewModel: NotificationsViewModel by viewModels { NotificationsViewModelFactory(App.myUserID) }
-    private lateinit var viewDataBinding: FragmentNotificationsBinding
-    private lateinit var listAdapter: NotificationsListAdapter
+    private NotificationsViewModel viewModel;
+    private RecyclerView usersRecyclerView;
+    private UsersAdapter usersAdapter;
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        viewDataBinding = FragmentNotificationsBinding.inflate(inflater, container, false)
-            .apply { viewmodel = viewModel }
-        viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
-        return viewDataBinding.root
-    }
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_notifications);
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        setupListAdapter()
-    }
+        viewModel = new ViewModelProvider(this).get(NotificationsViewModel.class);
 
-    private fun setupListAdapter() {
-        val viewModel = viewDataBinding.viewmodel
-        if (viewModel != null) {
-            listAdapter = NotificationsListAdapter(viewModel)
-            viewDataBinding.usersRecyclerView.adapter = listAdapter
+        usersRecyclerView = findViewById(R.id.usersRecyclerView);
+        usersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        viewModel.getUsersInfoList().observe(this, usersInfoList -> {
+        if (usersAdapter == null) {
+            usersAdapter = new UsersAdapter(usersInfoList);
+            usersRecyclerView.setAdapter(usersAdapter);
         } else {
-            throw Exception("The viewmodel is not initialized")
+            usersAdapter.notifyDataSetChanged();
         }
+    });
     }
 }

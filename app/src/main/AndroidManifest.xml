@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Декларация приложения с основными атрибутами -->
     <application
         tools:replace="android:appComponentFactory"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -13,30 +14,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Classmate"
-        tools:targetApi="34">
+        tools:targetApi="34"
+        >
+        <!-- Главная активность приложения с привязкой к категории LAUNCHER -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Classmate.NoActionBar">
+            android:theme="@style/Theme.Classmate.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Логин активность не будет доступна извне (exported = false) -->
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
+
+        <!-- Активность регистрации, которая также может быть начальной (двойной MAIN и LAUNCHER) -->
         <activity
             android:name=".SignupActivity"
-            android:exported="true">
+            android:exported="true"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Декларация метаданных для предзагруженных шрифтов -->
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
